@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Quizzi</string>
+    <string name="welcome">Welcome</string>
+    <string name="quiz_app">Quiz App</string>
+    <string name="please_enter_your_name">Please enter your name</string>
+    <string name="eg_nick">eg. Nick</string>
+    <string name="start">Start</string>
 </resources>
