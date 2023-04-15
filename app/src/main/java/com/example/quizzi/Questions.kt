@@ -32,7 +32,6 @@ class Questions : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
 
-
         tvQuestion = findViewById(R.id.tv_question)
         progressBar = findViewById(R.id.progress_bar)
         tvProgrss = findViewById(R.id.tv_progress)
@@ -41,23 +40,25 @@ class Questions : AppCompatActivity(), View.OnClickListener {
         tvOption2 = findViewById(R.id.tv_option2)
         tvOption3 = findViewById(R.id.tv_option3)
         tvOption4 = findViewById(R.id.tv_option4)
+        subBtn = findViewById(R.id.btn_submit)
 
+        mQuestionList = Constants.getQuestion()
+        SetQuestion()
 
         tvOption1?.setOnClickListener(this)
         tvOption2?.setOnClickListener(this)
         tvOption3?.setOnClickListener(this)
         tvOption4?.setOnClickListener(this)
-
-        mQuestionList = Constants.getQuestion()
-        SetQuestion()
+        subBtn?.setOnClickListener(this)
 
     }
 
     private fun SetQuestion() {
 
 
-
+        defaultOptionView()
         val question: QuestionsData = mQuestionList!![mCurrentPosition - 1]
+
 
         tvQuestion?.text = question.question
         tvImage?.setImageResource(question.image)
@@ -68,11 +69,11 @@ class Questions : AppCompatActivity(), View.OnClickListener {
         tvOption3?.text = question.option3
         tvOption4?.text = question.option4
 
-//        if (mCurrentPosition == mQuestionList!!.size){
-//            subBtn?.text = "Finish"
-//        }else{
-//            subBtn?.text = "SUBMIT"
-//        }
+        if (mCurrentPosition == mQuestionList!!.size){
+            subBtn?.text = "Finish"
+        }else{
+            subBtn?.text = "SUBMIT"
+        }
 
 
 
@@ -146,6 +147,58 @@ class Questions : AppCompatActivity(), View.OnClickListener {
                     selectedOption(it, 4)
                 }
             }
+
+            R.id.btn_submit ->{
+                if(mCurrentPosition == 0){
+                    mCurrentPosition ++
+
+                    when{
+                        mCurrentPosition <= mQuestionList!!.size ->{
+                            SetQuestion()
+                        }
+                    }
+                }
+                else{
+                    val question = mQuestionList?.get(mCurrentPosition-1)
+                    if (question!!.correctAnswer != mSelectedOption){
+                        answerView(mSelectedOption, R.drawable.wrong_option_border_bg)
+                    }
+                    answerView(question.correctAnswer, R.drawable.right_option_border_bg)
+                }
+
+            }
+
         }
     }
+
+    private fun answerView(answer: Int, drawableView: Int){
+        when(answer){
+            1 ->{
+                tvOption1?.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
+            }
+
+            2 ->{
+                tvOption2?.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
+            }
+
+            3 ->{
+                tvOption3?.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
+            }
+
+            4 ->{
+                tvOption4?.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
+            }
+        }
+
+    }
+
+
 }
