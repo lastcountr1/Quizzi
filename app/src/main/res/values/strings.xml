@@ -6,4 +6,6 @@
     <string name="eg_nick">eg. Nick</string>
     <string name="start">Start</string>
     <string name="submit">SUBMIT</string>
+    <string name="result">Result</string>
+    <string name="hey_congratulations">Hey Congratulations</string>
 </resources>
