@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -60,6 +59,12 @@ class Questions : AppCompatActivity(), View.OnClickListener {
         val question: QuestionsData = mQuestionList!![mCurrentPosition - 1]
 
 
+        if (mCurrentPosition == mQuestionList!!.size) {
+            subBtn?.text = "FINISH"
+        } else {
+            subBtn?.text = "SUBMIT"
+        }
+
         tvQuestion?.text = question.question
         tvImage?.setImageResource(question.image)
         progressBar?.progress = mCurrentPosition
@@ -68,12 +73,6 @@ class Questions : AppCompatActivity(), View.OnClickListener {
         tvOption2?.text = question.option2
         tvOption3?.text = question.option3
         tvOption4?.text = question.option4
-
-        if (mCurrentPosition == mQuestionList!!.size){
-            subBtn?.text = "Finish"
-        }else{
-            subBtn?.text = "SUBMIT"
-        }
 
 
 
@@ -109,7 +108,6 @@ class Questions : AppCompatActivity(), View.OnClickListener {
 
 
     private fun selectedOption(tv: TextView, selectedOptionNum: Int){
-
         defaultOptionView()
         mSelectedOption = selectedOptionNum
         tv.setTextColor(Color.parseColor("#6911cf"))
@@ -149,12 +147,15 @@ class Questions : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.btn_submit ->{
-                if(mCurrentPosition == 0){
+                if(mSelectedOption == 0){
                     mCurrentPosition ++
 
                     when{
                         mCurrentPosition <= mQuestionList!!.size ->{
                             SetQuestion()
+                        }
+                        else -> {
+                            Toast.makeText(this, "You hav completed the quiz", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -164,7 +165,21 @@ class Questions : AppCompatActivity(), View.OnClickListener {
                         answerView(mSelectedOption, R.drawable.wrong_option_border_bg)
                     }
                     answerView(question.correctAnswer, R.drawable.right_option_border_bg)
+
+                    if (mCurrentPosition == mQuestionList!!.size){
+                        subBtn?.text = "Finish"
+                    }else{
+                        subBtn?.text = "Go to next Question"
+
+                    }
+
+                    mSelectedOption = 0
+
+
                 }
+
+
+
 
             }
 
