@@ -162,6 +162,7 @@ class Questions : AppCompatActivity(), View.OnClickListener {
                             SetQuestion()
                         }
                         else -> {
+                            mUserName = intent.getStringExtra(Constants.USER_NAME)
                             val intent = Intent(this, Result::class.java)
                             intent.putExtra(Constants.USER_NAME, mUserName)
                             intent.putExtra(Constants.CORRECT_ANSWER, WrongAnser)

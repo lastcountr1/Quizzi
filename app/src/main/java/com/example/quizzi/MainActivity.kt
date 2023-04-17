@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.quizzi.Result
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
         val editName = findViewById<EditText>(R.id.edit_name)
 
         startBtn.setOnClickListener {
+
+
+
             if(editName.text.isEmpty()){
                 Toast.makeText(this, "Please enter yout name", Toast.LENGTH_SHORT).show()
             }else{
