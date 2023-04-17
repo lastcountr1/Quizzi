@@ -1,5 +1,6 @@
 package com.example.quizzi
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +12,18 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.quizzi.Result
 
 class Questions : AppCompatActivity(), View.OnClickListener {
 
     private var mQuestionList: ArrayList<QuestionsData> ?= null
     private var mCurrentPosition: Int = 1
     private var mSelectedOption: Int = 0
+    private var mUserName: String ?= null
+    private var WrongAnser: Int = 0
+
+
+
     private var progressBar:ProgressBar ?= null
     private var tvQuestion:TextView ?= null
     private var tvImage:ImageView ?= null
@@ -155,7 +162,12 @@ class Questions : AppCompatActivity(), View.OnClickListener {
                             SetQuestion()
                         }
                         else -> {
-                            Toast.makeText(this, "You hav completed the quiz", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this, Result::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWER, WrongAnser)
+                            intent.putExtra(Constants.TOTAL_QUESTION, mQuestionList?.size)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 }
@@ -163,6 +175,7 @@ class Questions : AppCompatActivity(), View.OnClickListener {
                     val question = mQuestionList?.get(mCurrentPosition-1)
                     if (question!!.correctAnswer != mSelectedOption){
                         answerView(mSelectedOption, R.drawable.wrong_option_border_bg)
+                        WrongAnser ++
                     }
                     answerView(question.correctAnswer, R.drawable.right_option_border_bg)
 

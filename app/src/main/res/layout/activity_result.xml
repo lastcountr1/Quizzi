@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@drawable/ic_bg"
     tools:context=".Result">
 
@@ -14,12 +15,15 @@
         android:gravity="center"
         android:textSize="40sp"
         android:textColor="@color/white"
-        android:text="@string/result"/>
+        android:layout_marginTop="10dp"
+        android:text="@string/result"
+        android:textStyle="bold"/>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_trophy" />
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_trophy"
+        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -27,30 +31,43 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
         android:text="@string/hey_congratulations"/>
 
     <TextView
+        android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20sp"
         android:textColor="@color/white"
-        tools:text="Nikhil"/>
+        tools:text="Nikhil"
+        android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/tv_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="#3b3e47"
         android:textSize="18sp"
-        tools:text="Your score is "/>
+        android:layout_marginTop="16dp"
+        tools:text="Your score is 9 out of 10"
+        android:textStyle="bold"/>
 
     <Button
+        android:id="@+id/finish_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Finish"
         android:textColor="@color/design_default_color_primary"
-        android:background="@drawable/btn_bg"/>
+        android:backgroundTint="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
 
 
